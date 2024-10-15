@@ -1,22 +1,20 @@
 <template>
   <div class="business-card">
-    <span v-if="strapiData?.data?.length"
-      ><i>Имя</i>: {{ strapiData.data[0].firstname }}</span
-    >
-    <span v-if="strapiData?.data?.length"
-      ><i>Фамилия</i>: {{ strapiData.data[0].lastname }}</span
-    >
-    <span v-if="strapiData?.data?.length"
-      ><i>Возраст</i>: {{ strapiData.data[0].age }}</span
-    >
+    <span v-if="strapiData?.data?.length">
+      <i>Имя</i>: {{ strapiData.data[0].firstname }}
+    </span>
+    <span v-if="strapiData?.data?.length">
+      <i>Фамилия</i>: {{ strapiData.data[0].lastname }}
+    </span>
+    <span v-if="strapiData?.data?.length">
+      <i>Возраст</i>: {{ strapiData.data[0].age }}
+    </span>
     <p v-if="strapiData?.data?.[0]?.about?.[0]?.children?.length">
       <i>О себе</i>: {{ strapiData.data[0].about[0].children[0].text }}
     </p>
-
     <p v-if="strapiData?.data?.[0]?.avatar?.formats?.small?.url?.length">
       <i>Фото из Strapi</i>
     </p>
-
     <img
       v-if="strapiData?.data?.[0]?.avatar?.formats?.small?.url?.length"
       :src="baseUrl + strapiData.data[0].avatar.formats.small.url"
@@ -31,8 +29,10 @@
 const config = useRuntimeConfig();
 const baseUrl = config.public.baseUrl;
 
-const strapiData: IStrapiData = await $fetch(
-  `${baseUrl}/api/people?fields=firstname,lastname,age,about&populate=avatar`
+const { data: strapiData } = await useAsyncData<IStrapiData>(() =>
+  $fetch(
+    `${baseUrl}/api/people?fields=firstname,lastname,age,about&populate=avatar`
+  )
 );
 </script>
 
