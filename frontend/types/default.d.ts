@@ -5,7 +5,7 @@ interface IStrapiPagination {
   total?: number;
 }
 
-interface IPersonAboutObject {
+interface IStrapiAbout {
   type?: string;
   children?: {
     type?: string;
@@ -13,7 +13,7 @@ interface IPersonAboutObject {
   }[];
 }
 
-interface IAvatarFormatObject {
+interface IStrapiAvatarFormat {
   name?: string;
   hash?: string;
   ext?: string;
@@ -26,7 +26,7 @@ interface IAvatarFormatObject {
   url?: string;
 }
 
-interface IAvatarObject {
+interface IStrapiAvatar {
   id?: number;
   documentId?: string;
   name?: string;
@@ -35,10 +35,10 @@ interface IAvatarObject {
   width?: number;
   height?: number;
   formats?: {
-    thumbnail?: IAvatarFormatObject;
-    small?: IAvatarFormatObject;
-    medium?: IAvatarFormatObject;
-    large?: IAvatarFormatObject;
+    thumbnail?: IStrapiAvatarFormat;
+    small?: IStrapiAvatarFormat;
+    medium?: IStrapiAvatarFormat;
+    large?: IStrapiAvatarFormat;
   };
   hash?: string;
   ext?: string;
@@ -55,9 +55,9 @@ interface IAvatarObject {
 }
 
 interface IStrapiPerson {
-  about?: IPersonAboutObject[];
+  about?: IStrapiAbout[];
   age?: number;
-  avatar?: IAvatarObject;
+  avatar?: IStrapiAvatar;
   documentId?: string;
   firstname?: string;
   lastname?: string;
